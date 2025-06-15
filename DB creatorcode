@@ -2,31 +2,16 @@ from pathlib import Path
 from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
-
-# Define relative paths
-kb_folder = Path("INPcontFiles")         # Folder with your PDFs
-index_path = Path("my_vectoredb")   # Where to save the vector DB
-
-# Create the folder if it doesn't exist
-kb_folder.mkdir(exist_ok=True)
-
-# Load all PDFs from the knowledge base folder
+from langchain_community.vectorstores import FAISS 
+kb_folder = Path("INPcontFiles")                            # Making a knowledgebase folder kb with relative paths of fixed files to be included in the Database
+index_path = Path("my_vectoredb")                           # The index path is the relative path for storing the created vector database
+kb_folder.mkdir(exist_ok=True)                              # This makes the required directory is it doesnt exists
 loader = DirectoryLoader(str(kb_folder), glob="*.pdf", loader_cls=PyPDFLoader)
-docs = loader.load()
-
-# Split documents into chunks
+docs = loader.load()                                        # Loads the directory containing input content pdfs in the docs obj format
 splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-splits = splitter.split_documents(docs)
-
-# Initialize embeddings model
+splits = splitter.split_documents(docs)                     # Splits the loaded docs into chunks  
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-
-# Create FAISS vector store from documents
-vectorstore = FAISS.from_documents(splits, embeddings)
-
-# Save the vector store locally using a relative path
-vectorstore.save_local(str(index_path))
-
+vectorstore = FAISS.from_documents(splits, embeddings)      # Embedds the chunks and stores in database
+vectorstore.save_local(str(index_path))                     # Stores the database locally which can be imported in the main code later
 print(f"Knowledge base folder: {kb_folder.resolve()}")
 print(f"Vector DB saved to: {index_path.resolve()}")
