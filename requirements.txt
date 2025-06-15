@@ -3,6 +3,7 @@ python-dotenv
 langchain
 langchain-community
 langchain-huggingface
+langchain-google-genai
 streamlit
 faiss-cpu
 openai
