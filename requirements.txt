@@ -1,0 +1,8 @@
+pathlib
+python-dotenv
+langchain
+langchain-community
+streamlit
+faiss
+openai
+google-generativeai
