@@ -8,3 +8,4 @@ streamlit
 faiss-cpu
 openai
 google-generativeai
+sentence-transformers
