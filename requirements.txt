@@ -2,6 +2,7 @@ pathlib
 python-dotenv
 langchain
 langchain-community
+langchain-huggingface
 streamlit
 faiss-cpu
 openai
