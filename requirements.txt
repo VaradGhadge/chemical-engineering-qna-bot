@@ -10,3 +10,4 @@ openai
 google-generativeai
 sentence-transformers
 Pypdf2
+Pypdf
