@@ -9,3 +9,4 @@ faiss-cpu
 openai
 google-generativeai
 sentence-transformers
+Pypdf2
