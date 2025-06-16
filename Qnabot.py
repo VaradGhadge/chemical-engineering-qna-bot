@@ -29,7 +29,7 @@ uploaded_file = st.file_uploader("Upload your PDF (optional):", type=["pdf"])
 user_vectorstore = None                                         # This gets the input pdf from the user
 
 if uploaded_file:
-    with open("temp.pdf", "rb") as f:
+    with open("temp.pdf", "wb") as f:
         f.write(uploaded_file.getbuffer())                      # Code for streamlit ui for user file upload 
     loader = PyPDFLoader("temp.pdf")
     user_docs = loader.load()
